@@ -3,6 +3,8 @@
 trigger:
 - main
 
+pool: server
+
 steps:
 - task: InvokeRESTAPI@1
   displayName: 'Invoke REST API: GET'
