@@ -1,0 +1,75 @@
+{
+    "name": "DemoFlogoApp",
+    "description": "  ",
+    "version": "1.0.0",
+    "type": "flogo",
+    "resources": {
+        "physicalMemory": 1024,
+        "totalMemory": 4096,
+        "cpuQuota": 25
+    },
+    "endpoints": [
+        {
+            "name": "AppHealthCheck",
+            "pingable": true,
+            "protocol": "http",
+            "port": "7777",
+            "type": "private",
+            "ping": "/ping"
+        },
+        {
+            "protocol": "http",
+            "port": "9999",
+            "spec": {
+                "name": "DemoFlogoApp",
+                "version": "1.0.0"
+            },
+            "title": "ReceiveHTTPMessage",
+            "swagger": {
+                "swagger": "2.0",
+                "info": {
+                    "title": "DemoFlogoApp",
+                    "version": "1.0.0",
+                    "description": "Simple REST Trigger"
+                },
+                "paths": {
+                    "/hello/{name}": {
+                        "get": {
+                            "summary": "sayHello",
+                            "operationId": "get_hello_name",
+                            "parameters": [
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "Request parameter",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ],
+                            "responses": {
+                                "200": {
+                                    "description": "Rest Response",
+                                    "schema": {
+                                        "$ref": "#/definitions/schema1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "definitions": {
+                    "schema1": {
+                        "type": "object",
+                        "properties": {
+                            "body": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "propertyPrefix": "TCI_FLOGO_USER_",
+    "properties": []
+}
