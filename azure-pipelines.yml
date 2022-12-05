@@ -10,10 +10,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
+- script: echo Calling TIBCO TCI REST API
   displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: InvokeRESTAPI@1
+  inputs:
+    connectionType: 'connectedServiceName' 
+    serviceConnection: 'TibcoTCIConnection'    
+    urlSuffix: '/v1/subscriptions/0/apps/ftwgminksmk3eene3llpzdtk4gce5qrf'
+    method: 'GET'
+    
