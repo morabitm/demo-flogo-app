@@ -3,9 +3,6 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
-
 steps:
 - task: InvokeRESTAPI@1
   displayName: 'Invoke REST API: GET'
