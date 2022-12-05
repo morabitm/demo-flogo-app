@@ -12,6 +12,10 @@ steps:
     connectionType: 'connectedServiceName'
     serviceConnection: 'TibcoTCIConnection'    
     urlSuffix: '/v1/subscriptions/0/apps/ftwgminksmk3eene3llpzdtk4gce5qrf'
-    method: 'GET'    
+    method: 'GET'
+    headers: |
+          {
+            "AuthToken":"$(system.AccessToken)"
+          }     
     waitForCompletion: 'true'
     
