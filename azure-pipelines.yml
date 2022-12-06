@@ -9,9 +9,10 @@ steps:
 - task: InvokeRESTAPI@1
   displayName: 'Invoke REST API: GET'
   inputs:    
-    connectionType: 'connectedServiceName'
+    connectionType: 'Generic'
     serviceConnection: 'TibcoTCIConnection'    
     urlSuffix: '/v1/subscriptions/0/apps/ftwgminksmk3eene3llpzdtk4gce5qrf'
-    method: 'GET'    
+    method: 'GET'  
+    #headers: '{\n"Authorization":"bearer ${token}"'  
     waitForCompletion: 'true'
     
