@@ -3,20 +3,18 @@
 trigger:
 - main
 
-pool: server
+pool: 
+    vmImage: 'ubuntu-latest'
 
 steps:
-- task: InvokeRESTAPI@1
-  displayName: 'Invoke REST API: GET'
+- task: AzureKeyVault@2
+  displayName: 'Get secret from keyvault'
   inputs:    
-    connectionType: 'connectedServiceName'
-    serviceConnection: 'TibcoTCIConnection'    
-    urlSuffix: '/apps/ftwgminksmk3eene3llpzdtk4gce5qrf'
-    method: 'GET'  
-    headers: |
-      {
-       "Content-Type":"application/json",
-       "Authorization":"Bearer $(token)"
-      }
-    waitForCompletion: 'true'
-    
+    azureSubscription: 'SUB_Rdam_Management'
+    KeyVaultName: 'KVRdamPFManagementDevHIP'
+    SecretsFilter: '*'
+    RunAsPreJob: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'echo $(Your-Secret-Name) > secret.txt'
