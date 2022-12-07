@@ -9,10 +9,14 @@ steps:
 - task: InvokeRESTAPI@1
   displayName: 'Invoke REST API: GET'
   inputs:    
-    connectionType: 'Generic'
+    connectionType: 'connectedServiceName'
     serviceConnection: 'TibcoTCIConnection'    
-    urlSuffix: '/v1/subscriptions/0/apps/ftwgminksmk3eene3llpzdtk4gce5qrf'
+    urlSuffix: '/apps/ftwgminksmk3eene3llpzdtk4gce5qrf'
     method: 'GET'  
-    #headers: '{\n"Authorization":"bearer ${token}"'  
+    headers: |
+      {
+       "Content-Type":"application/json",
+       "Authorization":"Bearer $(token)"
+      }
     waitForCompletion: 'true'
     
