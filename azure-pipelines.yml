@@ -1,20 +1,60 @@
-# Starter pipeline
+trigger: none
+#- main
 
-trigger:
-- main
 
-pool: 
-    vmImage: 'ubuntu-latest'
+variables:
+-name: azureSubscriptionName
+ value: 'Free Trial(036e3d15-5bb2-42bd-9c32-284ecaf1032a)'
+- name: tciBaseUrl
+  value: 'https://eu.api.cloud.tibco.com/tci/v1/subscriptions/0'
+- name: appName
+  value: 'FlogoDemoApp'
+- name: instanceCount
+  value: 1 
 
-steps:
-- task: AzureKeyVault@2
-  displayName: 'Get secret from keyvault'
-  inputs:    
-    azureSubscription: 'SUB_Rdam_Management'
-    KeyVaultName: 'KVRdamPFManagementDevHIP'
-    SecretsFilter: '*'
-    RunAsPreJob: false
+stages:
+- stage: StageDev
+  jobs:
+  - deployment: deployOnDev
+    pool:
+      vmImage: ubuntu-latest
+    environment: Development
+	strategy:
+	  runOnce:
+	    deploy:
+          steps:  
+          - task: AzureKeyVault@2
+            inputs:
+              azureSubscription: $(azureSubscriptionName)
+              KeyVaultName: 'KVMostafaDemo'
+              SecretsFilter: '*'
+              RunAsPreJob: false
 
-- task: CmdLine@2
-  inputs:
-    script: 'echo $(Your-Secret-Name) > secret.txt'
+          - task: Bash@3            
+            inputs:
+               targetType: filePath
+               filePath: flogo_deploy.sh               
+               
+  
+- stage: StageTest
+  jobs:
+  - deployment: deployOnTest
+    dependsOn: deployOnDev
+    pool:
+      vmImage: ubuntu-latest
+    environment: Test
+	strategy:
+	  runOnce:
+	    deploy:
+          steps:  
+          - task: AzureKeyVault@2
+            inputs:
+              azureSubscription: $(azureSubscriptionName)
+              KeyVaultName: 'KVMostafaDemo'
+              SecretsFilter: '*'
+              RunAsPreJob: false
+
+          - task: Bash@3            
+            inputs:
+               targetType: filePath
+               filePath: flogo_deploy.sh               

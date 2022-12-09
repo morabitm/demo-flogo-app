@@ -6,7 +6,7 @@
         "git.tibco.com/git/product/ipaas/wi-contrib.git/contributions/General/trigger/rest",
         "github.com/project-flogo/contrib/function/string"
     ],
-    "name": "DemoFlogoApp",
+    "name": "New_Flogo_App_0",
     "description": "  ",
     "version": "1.0.0",
     "type": "flogo:app",
@@ -22,6 +22,7 @@
                 "APISpecUpdate": false,
                 "swagger": "",
                 "swaggerVersion": "v2",
+                "apiVersion": "1.0.0",
                 "secureConnection": false,
                 "serverKey": "",
                 "caCertificate": ""
@@ -112,7 +113,7 @@
                             "input": {
                                 "Log Level": "INFO",
                                 "flowInfo": false,
-                                "message": "=string.concat(\"Hello: \", $flow.pathParams.name)"
+                                "message": "=string.concat($property[\"greeting\"], \" \",$flow.pathParams.name)"
                             }
                         }
                     },
@@ -185,7 +186,13 @@
             }
         }
     ],
-    "properties": [],
+    "properties": [
+        {
+            "name": "greeting",
+            "type": "string",
+            "value": "Hallo"
+        }
+    ],
     "connections": {},
     "contrib": "W3sicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1jb250cmliLmdpdC9jb250cmlidXRpb25zL0dlbmVyYWwiLCJzM2xvY2F0aW9uIjoiVGliY28vR2VuZXJhbCJ9XQ=="
 }

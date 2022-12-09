@@ -1,5 +1,5 @@
 {
-    "name": "DemoFlogoApp",
+    "name": "New_Flogo_App_0",
     "description": "  ",
     "version": "1.0.0",
     "type": "flogo",
@@ -21,14 +21,14 @@
             "protocol": "http",
             "port": "9999",
             "spec": {
-                "name": "DemoFlogoApp",
+                "name": "New_Flogo_App_0",
                 "version": "1.0.0"
             },
             "title": "ReceiveHTTPMessage",
             "swagger": {
                 "swagger": "2.0",
                 "info": {
-                    "title": "DemoFlogoApp",
+                    "title": "New_Flogo_App_0",
                     "version": "1.0.0",
                     "description": "Simple REST Trigger"
                 },
@@ -71,5 +71,11 @@
         }
     ],
     "propertyPrefix": "TCI_FLOGO_USER_",
-    "properties": []
+    "properties": [
+        {
+            "name": "greeting",
+            "datatype": "string",
+            "default": "Hallo"
+        }
+    ]
 }
